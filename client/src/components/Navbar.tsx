@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { label: "Menu", href: "/menu", isPage: true },
   { label: "Gallery", href: "/experience", isPage: true },
   { label: "Artists", href: "/artists", isPage: true },
+  { label: "About", href: "/about", isPage: true },
   { label: "Events", href: "#events" },
   { label: "Reserve", href: "#reserve" },
 ];

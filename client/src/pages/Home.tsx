@@ -561,6 +561,9 @@ function ExperienceSection() {
           ))}
         </div>
 
+        {/* Corporate Inquiry Form */}
+        <CorporateInquiryForm />
+
         {/* Full-width venue image */}
         <Reveal delay={0.2}>
           <div style={{

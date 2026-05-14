@@ -153,6 +153,7 @@ export default function Footer() {
               Explore
             </h4>
             {[
+              { label: "About Us", href: "/about" },
               { label: "The Experience", href: "/experience" },
               { label: "Cocktail Menu", href: "/menu" },
               { label: "Artist Discovery", href: "/artists" },

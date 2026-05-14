@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import Artists from "./pages/Artists";
 import Experience from "./pages/Experience";
+import About from "./pages/About";
 
 function Router() {
   return (
@@ -18,6 +19,7 @@ function Router() {
       <Route path={"/menu"} component={Menu} />
       <Route path={"/artists"} component={Artists} />
       <Route path={"/experience"} component={Experience} />
+      <Route path={"/about"} component={About} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
