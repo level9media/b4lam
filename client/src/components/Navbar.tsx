@@ -14,7 +14,7 @@ const NAV_LINKS = [
   { label: "Gallery", href: "/experience", isPage: true },
   { label: "Artists", href: "/artists", isPage: true },
   { label: "About", href: "/about", isPage: true },
-  { label: "Events", href: "#events" },
+  { label: "Events", href: "/events", isPage: true },
   { label: "Reserve", href: "#reserve" },
 ];
 

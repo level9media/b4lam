@@ -154,6 +154,7 @@ export default function Footer() {
             </h4>
             {[
               { label: "About Us", href: "/about" },
+              { label: "Events & Nightlife", href: "/events" },
               { label: "The Experience", href: "/experience" },
               { label: "Cocktail Menu", href: "/menu" },
               { label: "Artist Discovery", href: "/artists" },
