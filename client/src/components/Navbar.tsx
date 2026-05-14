@@ -6,10 +6,12 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useLocation } from "wouter";
 
 const NAV_LINKS = [
   { label: "Experience", href: "#experience" },
   { label: "Cocktails", href: "#cocktails" },
+  { label: "Menu", href: "/menu", isPage: true },
   { label: "Events", href: "#events" },
   { label: "Gallery", href: "#gallery" },
   { label: "Reserve", href: "#reserve" },
@@ -18,6 +20,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [, navigate] = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -25,8 +28,22 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleNav = (href: string) => {
+  const handleNav = (href: string, isPage?: boolean) => {
     setMenuOpen(false);
+    if (isPage) {
+      navigate(href);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    // If we're not on home, navigate home first then scroll
+    if (window.location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+      return;
+    }
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
@@ -101,7 +118,7 @@ export default function Navbar() {
           {NAV_LINKS.map((link) => (
             <button
               key={link.href}
-              onClick={() => handleNav(link.href)}
+              onClick={() => handleNav(link.href, link.isPage)}
               style={{
                 background: "none",
                 border: "none",
@@ -209,7 +226,7 @@ export default function Navbar() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.06 }}
-              onClick={() => handleNav(link.href)}
+              onClick={() => handleNav(link.href, link.isPage)}
               style={{
                 display: "block",
                 width: "100%",
