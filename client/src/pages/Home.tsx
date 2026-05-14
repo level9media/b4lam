@@ -93,6 +93,10 @@ function SectionHeading({ label, title, subtitle }: { label: string; title: stri
 export default function Home() {
   const [splashDone, setSplashDone] = useState(false);
 
+  useEffect(() => {
+    document.title = "Blindside Lounge | Austin Nightlife Bar";
+  }, []);
+
   return (
     <div style={{ backgroundColor: "#000000", minHeight: "100vh" }}>
       {!splashDone && <SplashScreen onEnter={() => setSplashDone(true)} />}
@@ -266,6 +270,23 @@ function HeroSection() {
         >
           Upscale. Inviting. Unforgettable.
         </motion.p>
+
+        <motion.h2
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.1 }}
+          style={{
+            fontFamily: "'Raleway', sans-serif",
+            fontWeight: 300,
+            fontSize: "clamp(0.65rem, 1.2vw, 0.8rem)",
+            letterSpacing: "0.35em",
+            color: "rgba(43,127,255,0.7)",
+            textTransform: "uppercase",
+            marginBottom: "2rem",
+          }}
+        >
+          Austin&apos;s Upscale Nightlife Bar on Historic Sixth Street
+        </motion.h2>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
