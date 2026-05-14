@@ -606,7 +606,11 @@ function ExperienceSection() {
             <div style={{
               position: "absolute",
               bottom: "2.5rem",
-              left: "2.5rem",
+              left: 0,
+              right: 0,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}>
               <p style={{
                 fontFamily: "'Cinzel', serif",
