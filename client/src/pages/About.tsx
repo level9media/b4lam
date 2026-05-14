@@ -557,8 +557,9 @@ export default function About() {
               {/* Top neon glow line */}
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: "linear-gradient(to right, transparent, #2B7FFF, #8B3FBF, transparent)", zIndex: 2 }} />
 
+              <div style={{ height: "420px" }}>
               <MapView
-                className="w-full"
+                className="w-full h-full"
                 initialCenter={{ lat: 30.2672, lng: -97.7431 }}
                 initialZoom={16}
                 onMapReady={(map) => {
@@ -595,8 +596,8 @@ export default function About() {
                     ],
                   });
                 }}
-                style={{ height: "420px" }}
               />
+              </div>
             </div>
           </Reveal>
 
