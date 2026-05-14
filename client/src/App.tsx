@@ -4,6 +4,8 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { PageTransitionProvider } from "./contexts/PageTransitionContext";
+import SigilOverlay from "./components/SigilOverlay";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 
@@ -22,10 +24,14 @@ function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark">
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
+        <PageTransitionProvider>
+          <TooltipProvider>
+            <Toaster />
+            {/* Global neon sigil transition overlay — renders above everything */}
+            <SigilOverlay />
+            <Router />
+          </TooltipProvider>
+        </PageTransitionProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );

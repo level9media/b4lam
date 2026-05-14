@@ -332,7 +332,7 @@ function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — Blindside sigil watermark */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -349,13 +349,17 @@ function HeroSection() {
           gap: "6px",
         }}
       >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+        <motion.img
+          src="/manus-storage/logo_11eca033.webp"
+          alt=""
+          animate={{ y: [0, 8, 0], opacity: [0.18, 0.28, 0.18] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
           style={{
-            width: "1px",
-            height: "40px",
-            background: "linear-gradient(to bottom, rgba(43,127,255,0.6), transparent)",
+            width: "90px",
+            height: "90px",
+            objectFit: "contain",
+            filter: "brightness(1.4) saturate(1.2) drop-shadow(0 0 10px rgba(43,127,255,0.4))",
+            opacity: 0.22,
           }}
         />
       </motion.div>

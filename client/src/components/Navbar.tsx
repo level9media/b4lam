@@ -6,7 +6,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useLocation } from "wouter";
+import { usePageTransition } from "@/contexts/PageTransitionContext";
 
 const NAV_LINKS = [
   { label: "Experience", href: "#experience" },
@@ -20,7 +20,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [, navigate] = useLocation();
+  const { navigateTo } = usePageTransition();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -31,17 +31,17 @@ export default function Navbar() {
   const handleNav = (href: string, isPage?: boolean) => {
     setMenuOpen(false);
     if (isPage) {
-      navigate(href);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Trigger the neon sigil transition
+      navigateTo(href);
       return;
     }
-    // If we're not on home, navigate home first then scroll
+    // If we're not on home, navigate home with sigil then scroll
     if (window.location.pathname !== "/") {
-      navigate("/");
+      navigateTo("/");
       setTimeout(() => {
         const el = document.querySelector(href);
         if (el) el.scrollIntoView({ behavior: "smooth" });
-      }, 300);
+      }, 1000);
       return;
     }
     const el = document.querySelector(href);
