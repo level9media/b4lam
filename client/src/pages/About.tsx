@@ -8,6 +8,7 @@
 import { useEffect, useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { MapView } from "@/components/Map";
 
 /* ── Reveal on scroll ─────────────────────────────────────────────── */
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -517,6 +518,124 @@ export default function About() {
             >View the Gallery</a>
           </div>
         </Reveal>
+      </section>
+
+      {/* ── FIND US MAP ──────────────────────────────────────── */}
+      <section style={{ background: "#000", padding: "0 0 6rem" }}>
+        <div className="container">
+          <Reveal>
+            <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
+              <p style={{
+                fontFamily: "'Cinzel', serif", fontWeight: 300,
+                fontSize: "0.6rem", letterSpacing: "0.45em",
+                color: "#2B7FFF", textShadow: "0 0 12px rgba(43,127,255,0.7)",
+                textTransform: "uppercase", marginBottom: "0.6rem",
+              }}>Historic Sixth Street · Austin, Texas</p>
+              <h2 style={{
+                fontFamily: "'Cinzel', serif", fontWeight: 300,
+                fontSize: "clamp(1.4rem, 3vw, 2rem)",
+                letterSpacing: "0.15em", color: "#e8eaf0",
+                textTransform: "uppercase", marginBottom: "0.5rem",
+              }}>Find Us</h2>
+              <p style={{
+                fontFamily: "'Raleway', sans-serif", fontWeight: 300,
+                fontSize: "0.88rem", color: "rgba(184,196,208,0.5)",
+                letterSpacing: "0.05em",
+              }}>211 E. 6th Street, Austin, TX 78701</p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div style={{
+              position: "relative",
+              border: "1px solid rgba(43,127,255,0.2)",
+              overflow: "hidden",
+            }}>
+              {/* Corner accents */}
+              <div style={{ position: "absolute", top: 0, left: 0, width: 24, height: 24, borderTop: "1px solid #2B7FFF", borderLeft: "1px solid #2B7FFF", zIndex: 2 }} />
+              <div style={{ position: "absolute", bottom: 0, right: 0, width: 24, height: 24, borderBottom: "1px solid #8B3FBF", borderRight: "1px solid #8B3FBF", zIndex: 2 }} />
+              {/* Top neon glow line */}
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: "linear-gradient(to right, transparent, #2B7FFF, #8B3FBF, transparent)", zIndex: 2 }} />
+
+              <MapView
+                className="w-full"
+                initialCenter={{ lat: 30.2672, lng: -97.7431 }}
+                initialZoom={16}
+                onMapReady={(map) => {
+                  // Drop a custom neon-styled marker on Blindside Lounge
+                  const geocoder = new window.google.maps.Geocoder();
+                  geocoder.geocode(
+                    { address: "211 E 6th Street, Austin, TX 78701" },
+                    (results: google.maps.GeocoderResult[] | null, status: google.maps.GeocoderStatus) => {
+                      if (status === "OK" && results && results[0]) {
+                        const pos = results[0].geometry.location;
+                        map.setCenter(pos);
+                        new window.google.maps.marker.AdvancedMarkerElement({
+                          map,
+                          position: pos,
+                          title: "Blindside Lounge — 211 E. 6th Street, Austin, TX",
+                        });
+                      }
+                    }
+                  );
+                  // Apply dark neon map style
+                  map.setOptions({
+                    styles: [
+                      { elementType: "geometry", stylers: [{ color: "#0a0a14" }] },
+                      { elementType: "labels.text.stroke", stylers: [{ color: "#000" }] },
+                      { elementType: "labels.text.fill", stylers: [{ color: "#6b7a99" }] },
+                      { featureType: "road", elementType: "geometry", stylers: [{ color: "#1a1a2e" }] },
+                      { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#2B7FFF", lightness: -60 }] },
+                      { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#1e2a4a" }] },
+                      { featureType: "water", elementType: "geometry", stylers: [{ color: "#060614" }] },
+                      { featureType: "poi", elementType: "geometry", stylers: [{ color: "#0d0d1a" }] },
+                      { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#4a5568" }] },
+                      { featureType: "transit", elementType: "geometry", stylers: [{ color: "#0d0d1a" }] },
+                      { featureType: "administrative", elementType: "geometry.stroke", stylers: [{ color: "#2B7FFF", lightness: -70 }] },
+                    ],
+                  });
+                }}
+                style={{ height: "420px" }}
+              />
+            </div>
+          </Reveal>
+
+          {/* Address + hours row */}
+          <Reveal delay={0.15}>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+              gap: "1px",
+              background: "rgba(43,127,255,0.08)",
+              marginTop: "1px",
+            }}>
+              {[
+                { label: "Address", value: "211 E. 6th Street\nAustin, TX 78701" },
+                { label: "Thursday", value: "8 PM – 2 AM" },
+                { label: "Friday – Saturday", value: "9 PM – 3 AM" },
+                { label: "Sunday", value: "8 PM – 12 AM" },
+              ].map(({ label, value }) => (
+                <div key={label} style={{
+                  background: "#06060e",
+                  padding: "1.5rem 1.75rem",
+                  textAlign: "center",
+                }}>
+                  <p style={{
+                    fontFamily: "'Cinzel', serif", fontWeight: 300,
+                    fontSize: "0.52rem", letterSpacing: "0.35em",
+                    color: "#2B7FFF", textShadow: "0 0 8px rgba(43,127,255,0.5)",
+                    textTransform: "uppercase", marginBottom: "0.5rem",
+                  }}>{label}</p>
+                  <p style={{
+                    fontFamily: "'Raleway', sans-serif", fontWeight: 300,
+                    fontSize: "0.88rem", color: "rgba(184,196,208,0.7)",
+                    whiteSpace: "pre-line", lineHeight: 1.6,
+                  }}>{value}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       <Footer />
