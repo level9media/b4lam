@@ -569,21 +569,38 @@ function ExperienceSection() {
             overflow: "hidden",
             height: "clamp(300px, 45vw, 520px)",
           }}>
-            <img
-              src="/manus-storage/lounge1_1f5300c2.jpg"
-              alt="Blindside Lounge interior"
+            {/* Autoplay looping section video */}
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
               style={{
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                objectPosition: "center 40%",
+                objectPosition: "center center",
                 display: "block",
               }}
-            />
+            >
+              <source src="/manus-storage/section-video_ce8c8b47.mp4" type="video/mp4" />
+            </video>
+            {/* Dark vignette overlay */}
             <div style={{
               position: "absolute",
               inset: 0,
-              background: "linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 50%, rgba(0,0,0,0.4) 100%)",
+              background: "linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.45) 100%)",
+              pointerEvents: "none",
+            }} />
+            {/* Bottom fade to black */}
+            <div style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: "120px",
+              background: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.85))",
+              pointerEvents: "none",
             }} />
             {/* Overlay text */}
             <div style={{
@@ -593,11 +610,11 @@ function ExperienceSection() {
             }}>
               <p style={{
                 fontFamily: "'Cinzel', serif",
-                fontWeight: 700,
-                fontSize: "clamp(1.2rem, 3vw, 2rem)",
-                letterSpacing: "0.15em",
+                fontWeight: 300,
+                fontSize: "clamp(1.1rem, 3vw, 1.9rem)",
+                letterSpacing: "0.25em",
                 color: "#e8eaf0",
-                textShadow: "0 0 20px rgba(43,127,255,0.4)",
+                textShadow: "0 0 30px rgba(43,127,255,0.6), 0 0 60px rgba(43,127,255,0.3)",
               }}>ELEVATED · ENERGY · CONNECTION</p>
             </div>
           </div>
