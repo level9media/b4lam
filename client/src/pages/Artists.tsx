@@ -99,33 +99,40 @@ function HeroSection() {
       overflow: "hidden",
       background: "#000",
     }}>
-      {/* Background gradient */}
+      {/* Hero background image — MDX performer */}
+      <img
+        src="/manus-storage/i_am_mdx_1738539524_3559449976468692956_61634806768(1)_a9f721f0.jpg"
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: "absolute", inset: 0,
+          width: "100%", height: "100%",
+          objectFit: "cover",
+          objectPosition: "center 30%",
+          opacity: 0.35,
+          pointerEvents: "none",
+          userSelect: "none",
+        }}
+      />
+
+      {/* Dark gradient overlay — ensures text stays readable */}
       <div style={{
         position: "absolute", inset: 0,
-        background: "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(43,127,255,0.12) 0%, rgba(139,63,191,0.08) 40%, transparent 70%)",
+        background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.75) 100%)",
+        pointerEvents: "none",
+      }} />
+
+      {/* Neon blue tint overlay */}
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(43,127,255,0.08) 0%, rgba(139,63,191,0.05) 40%, transparent 70%)",
         pointerEvents: "none",
       }} />
 
       {/* Animated scan lines */}
       <div style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(43,127,255,0.015) 2px, rgba(43,127,255,0.015) 4px)",
-      }} />
-
-      {/* Large background sigil watermark */}
-      <div style={{
-        position: "absolute",
-        top: "50%", left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: "min(700px, 90vw)",
-        height: "min(700px, 90vw)",
-        opacity: 0.04,
-        pointerEvents: "none",
-        backgroundImage: "url(/manus-storage/logo_b9f0f3d0.png)",
-        backgroundSize: "contain",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        filter: "blur(1px)",
+        backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(43,127,255,0.012) 2px, rgba(43,127,255,0.012) 4px)",
       }} />
 
       <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "8rem 2rem 4rem" }}>
