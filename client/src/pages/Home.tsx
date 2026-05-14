@@ -644,12 +644,14 @@ function CocktailsSection() {
       subtitle: "Mezcal Sour",
       desc: "Artisanal mezcal, fresh citrus, agave, activated charcoal rim.",
       img: "/manus-storage/drink2_3d9ea3d4.jpg",
+      video: "/manus-storage/laserpiente_video_e61bbf13.mp4",
     },
     {
-      name: "El Oráculo",
+      name: "Pakal's Rocket",
       subtitle: "Blue Butterfly Margarita",
       desc: "Reposado tequila, butterfly pea flower, fresh lime, salted rim.",
       img: "/manus-storage/rearbar_06c68643.jpg",
+      video: "/manus-storage/pakals_rocket_video_d5ffe73a.mp4",
     },
   ];
 
@@ -700,18 +702,33 @@ function CocktailsSection() {
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
               >
                 <div style={{ position: "relative", height: "320px", overflow: "hidden" }}>
-                  <img
-                    src={drink.img}
-                    alt={drink.name}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      transition: "transform 0.6s ease",
-                    }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1.05)"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1)"; }}
-                  />
+                  {(drink as any).video ? (
+                    <video
+                      src={(drink as any).video}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src={drink.img}
+                      alt={drink.name}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        transition: "transform 0.6s ease",
+                      }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1.05)"; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1)"; }}
+                    />
+                  )}
                   <div style={{
                     position: "absolute",
                     inset: 0,
