@@ -632,6 +632,99 @@ function ExperienceSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   CORPORATE INQUIRY FORM
+   ═══════════════════════════════════════════════════════════ */
+function CorporateInquiryForm() {
+  const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", date: "", guests: "", eventType: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Corporate Event Inquiry — ${form.company || form.name}`);
+    const body = encodeURIComponent(
+      `Name: ${form.name}\nCompany: ${form.company}\nEmail: ${form.email}\nPhone: ${form.phone}\nEvent Date: ${form.date}\nGuest Count: ${form.guests}\nEvent Type: ${form.eventType}\n\nDetails:\n${form.message}`
+    );
+    window.location.href = `mailto:blindsidetattoos@live.com?subject=${subject}&body=${body}`;
+    setSubmitted(true);
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: "100%", background: "rgba(255,255,255,0.03)",
+    border: "1px solid rgba(43,127,255,0.2)", padding: "0.75rem 1rem",
+    fontFamily: "'Raleway', sans-serif", fontWeight: 300, fontSize: "0.88rem",
+    color: "#e8eaf0", outline: "none", boxSizing: "border-box",
+    transition: "border-color 0.25s",
+  };
+  const labelStyle: React.CSSProperties = {
+    fontFamily: "'Raleway', sans-serif", fontWeight: 500, fontSize: "0.6rem",
+    letterSpacing: "0.25em", color: "rgba(184,196,208,0.55)",
+    textTransform: "uppercase", display: "block", marginBottom: "0.4rem",
+  };
+
+  return (
+    <Reveal delay={0.15}>
+      <div style={{
+        marginTop: "3.5rem",
+        background: "rgba(6,6,14,0.95)",
+        border: "1px solid rgba(43,127,255,0.15)",
+        padding: "3rem 2.5rem",
+        position: "relative",
+        overflow: "hidden",
+      }}>
+        {/* Corner accents */}
+        <div style={{ position: "absolute", top: 0, left: 0, width: 28, height: 28, borderTop: "1px solid #2B7FFF", borderLeft: "1px solid #2B7FFF" }} />
+        <div style={{ position: "absolute", bottom: 0, right: 0, width: 28, height: 28, borderBottom: "1px solid #8B3FBF", borderRight: "1px solid #8B3FBF" }} />
+
+        <p style={{ fontFamily: "'Cinzel', serif", fontWeight: 300, fontSize: "0.62rem", letterSpacing: "0.4em", color: "#2B7FFF", textShadow: "0 0 10px rgba(43,127,255,0.7)", textTransform: "uppercase", marginBottom: "0.75rem" }}>Private & Corporate</p>
+        <h3 style={{ fontFamily: "'Cinzel', serif", fontWeight: 300, fontSize: "clamp(1.2rem, 2.5vw, 1.8rem)", letterSpacing: "0.1em", color: "#e8eaf0", textTransform: "uppercase", marginBottom: "0.5rem" }}>Book Your Event</h3>
+        <p style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 300, fontSize: "0.85rem", color: "rgba(184,196,208,0.5)", marginBottom: "2rem" }}>Full venue buyouts, corporate events, private parties, and VIP experiences. Tell us about your vision.</p>
+
+        {submitted ? (
+          <div style={{ textAlign: "center", padding: "2rem 0" }}>
+            <p style={{ fontFamily: "'Cinzel', serif", fontWeight: 300, fontSize: "1rem", letterSpacing: "0.2em", color: "#2B7FFF", textShadow: "0 0 20px rgba(43,127,255,0.6)" }}>INQUIRY SENT</p>
+            <p style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 300, fontSize: "0.85rem", color: "rgba(184,196,208,0.5)", marginTop: "0.5rem" }}>We'll be in touch within 24 hours.</p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem", marginBottom: "1.25rem" }}>
+              <div><label style={labelStyle}>Your Name *</label><input required style={inputStyle} value={form.name} onChange={e => setForm(f => ({...f, name: e.target.value}))} onFocus={e => (e.target as HTMLInputElement).style.borderColor = "rgba(43,127,255,0.6)"} onBlur={e => (e.target as HTMLInputElement).style.borderColor = "rgba(43,127,255,0.2)"} /></div>
+              <div><label style={labelStyle}>Company / Organization</label><input style={inputStyle} value={form.company} onChange={e => setForm(f => ({...f, company: e.target.value}))} onFocus={e => (e.target as HTMLInputElement).style.borderColor = "rgba(43,127,255,0.6)"} onBlur={e => (e.target as HTMLInputElement).style.borderColor = "rgba(43,127,255,0.2)"} /></div>
+              <div><label style={labelStyle}>Email *</label><input required type="email" style={inputStyle} value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} onFocus={e => (e.target as HTMLInputElement).style.borderColor = "rgba(43,127,255,0.6)"} onBlur={e => (e.target as HTMLInputElement).style.borderColor = "rgba(43,127,255,0.2)"} /></div>
+              <div><label style={labelStyle}>Phone</label><input type="tel" style={inputStyle} value={form.phone} onChange={e => setForm(f => ({...f, phone: e.target.value}))} onFocus={e => (e.target as HTMLInputElement).style.borderColor = "rgba(43,127,255,0.6)"} onBlur={e => (e.target as HTMLInputElement).style.borderColor = "rgba(43,127,255,0.2)"} /></div>
+              <div><label style={labelStyle}>Event Date</label><input type="date" style={{...inputStyle, colorScheme: "dark"}} value={form.date} onChange={e => setForm(f => ({...f, date: e.target.value}))} onFocus={e => (e.target as HTMLInputElement).style.borderColor = "rgba(43,127,255,0.6)"} onBlur={e => (e.target as HTMLInputElement).style.borderColor = "rgba(43,127,255,0.2)"} /></div>
+              <div><label style={labelStyle}>Expected Guests</label><input type="number" min="1" style={inputStyle} value={form.guests} onChange={e => setForm(f => ({...f, guests: e.target.value}))} onFocus={e => (e.target as HTMLInputElement).style.borderColor = "rgba(43,127,255,0.6)"} onBlur={e => (e.target as HTMLInputElement).style.borderColor = "rgba(43,127,255,0.2)"} /></div>
+            </div>
+            <div style={{ marginBottom: "1.25rem" }}>
+              <label style={labelStyle}>Event Type</label>
+              <select style={{...inputStyle, cursor: "pointer"}} value={form.eventType} onChange={e => setForm(f => ({...f, eventType: e.target.value}))} onFocus={e => (e.target as HTMLSelectElement).style.borderColor = "rgba(43,127,255,0.6)"} onBlur={e => (e.target as HTMLSelectElement).style.borderColor = "rgba(43,127,255,0.2)"}>
+                <option value="" style={{ background: "#0a0a0f" }}>Select event type...</option>
+                {["Corporate Event","Full Venue Buyout","Product Launch","Birthday / Celebration","Bachelorette / Bachelor","Brand Activation","Private Party","Other"].map(o => <option key={o} value={o} style={{ background: "#0a0a0f" }}>{o}</option>)}
+              </select>
+            </div>
+            <div style={{ marginBottom: "1.75rem" }}>
+              <label style={labelStyle}>Tell Us About Your Event</label>
+              <textarea rows={4} style={{...inputStyle, resize: "vertical"}} value={form.message} onChange={e => setForm(f => ({...f, message: e.target.value}))} onFocus={e => (e.target as HTMLTextAreaElement).style.borderColor = "rgba(43,127,255,0.6)"} onBlur={e => (e.target as HTMLTextAreaElement).style.borderColor = "rgba(43,127,255,0.2)"} />
+            </div>
+            <button type="submit" style={{
+              fontFamily: "'Cinzel', serif", fontWeight: 300, fontSize: "0.72rem",
+              letterSpacing: "0.25em", textTransform: "uppercase",
+              padding: "0.9rem 2.5rem", cursor: "pointer",
+              background: "linear-gradient(135deg, #2B7FFF 0%, #8B3FBF 100%)",
+              color: "#e8eaf0", border: "none",
+              boxShadow: "0 0 30px rgba(43,127,255,0.25)",
+              transition: "box-shadow 0.25s, transform 0.15s",
+            }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 50px rgba(43,127,255,0.45)"; (e.currentTarget as HTMLButtonElement).style.transform = "scale(1.02)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 30px rgba(43,127,255,0.25)"; (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)"; }}
+            >Submit Inquiry</button>
+          </form>
+        )}
+      </div>
+    </Reveal>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
    COCKTAILS SECTION
    ═══════════════════════════════════════════════════════════ */
 function CocktailsSection() {
