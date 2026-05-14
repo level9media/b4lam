@@ -121,6 +121,14 @@ export default function Home() {
    HERO SECTION — Video background + neon headline
    ═══════════════════════════════════════════════════════════ */
 function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, []);
+
   return (
     <section
       id="hero"
@@ -135,18 +143,35 @@ function HeroSection() {
         justifyContent: "center",
       }}
     >
-      {/* Video background — using looping venue image as fallback */}
-      <div
+      {/* Video background */}
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: "url(/manus-storage/lounge3_41607289.jpg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center 30%",
-          transform: "scale(1.05)",
-          transition: "transform 8s ease",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          objectPosition: "center",
+          transform: "scale(1.03)",
         }}
-      />
+      >
+        <source src="/manus-storage/hero-video_851c6ade.mp4" type="video/mp4" />
+        {/* Fallback image if video fails */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: "url(/manus-storage/lounge3_41607289.jpg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center 30%",
+          }}
+        />
+      </video>
 
       {/* Gradient overlays */}
       <div style={{
@@ -875,6 +900,39 @@ function GallerySection() {
    RESERVE SECTION
    ═══════════════════════════════════════════════════════════ */
 function ReserveSection() {
+  const [form, setForm] = useState({ name: "", phone: "", email: "", date: "", partySize: "", occasion: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+
+  const inputStyle: React.CSSProperties = {
+    width: "100%",
+    background: "rgba(255,255,255,0.04)",
+    border: "1px solid rgba(43,127,255,0.2)",
+    padding: "12px 16px",
+    fontFamily: "'Raleway', sans-serif",
+    fontSize: "0.88rem",
+    color: "#e8eaf0",
+    outline: "none",
+    transition: "border-color 0.25s, box-shadow 0.25s",
+    boxSizing: "border-box" as const,
+    colorScheme: "dark" as const,
+    backgroundColor: "rgba(255,255,255,0.04)",
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSending(true);
+    const subject = encodeURIComponent(`VIP/Reservation Inquiry — ${form.name} | ${form.date}`);
+    const body = encodeURIComponent(
+      `Name: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nDate: ${form.date}\nParty Size: ${form.partySize}\nOccasion: ${form.occasion}\n\nMessage:\n${form.message}`
+    );
+    window.location.href = `mailto:blindsidetattoos@live.com?subject=${subject}&body=${body}`;
+    setTimeout(() => {
+      setSending(false);
+      setSubmitted(true);
+    }, 800);
+  };
+
   return (
     <section
       id="reserve"
@@ -908,7 +966,20 @@ function ReserveSection() {
               subtitle="Reserve a table, inquire about bottle service, or plan a private event. We'll make sure your night is unforgettable."
             />
 
-            <div style={{
+            {submitted ? (
+              <div style={{
+                background: "rgba(0,0,0,0.7)",
+                border: "1px solid rgba(43,127,255,0.3)",
+                padding: "3rem 2.5rem",
+                backdropFilter: "blur(20px)",
+                textAlign: "center",
+              }}>
+                <div style={{ fontSize: "2rem", marginBottom: "1rem", color: "#2B7FFF" }}>✦</div>
+                <h3 style={{ fontFamily: "'Cinzel', serif", fontWeight: 300, fontSize: "1.2rem", letterSpacing: "0.2em", color: "#e8eaf0", marginBottom: "0.75rem" }}>REQUEST RECEIVED</h3>
+                <p style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 300, fontSize: "0.88rem", color: "rgba(184,196,208,0.6)", lineHeight: 1.8 }}>Your email client should have opened with your inquiry pre-filled. We’ll confirm your reservation within 24 hours.</p>
+              </div>
+            ) : (
+            <form onSubmit={handleSubmit} style={{
               background: "rgba(0,0,0,0.7)",
               border: "1px solid rgba(43,127,255,0.2)",
               padding: "2.5rem",
@@ -916,91 +987,72 @@ function ReserveSection() {
               boxShadow: "0 0 40px rgba(43,127,255,0.08)",
             }}>
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                {[
-                  { label: "Your Name", type: "text", placeholder: "Full Name" },
-                  { label: "Phone Number", type: "tel", placeholder: "(512) 000-0000" },
-                  { label: "Email", type: "email", placeholder: "your@email.com" },
-                  { label: "Date", type: "date", placeholder: "" },
-                ].map((field) => (
-                  <div key={field.label} style={{ textAlign: "left" }}>
-                    <label style={{
-                      fontFamily: "'Raleway', sans-serif",
-                      fontWeight: 500,
-                      fontSize: "0.62rem",
-                      letterSpacing: "0.25em",
-                      color: "rgba(184,196,208,0.55)",
-                      textTransform: "uppercase",
-                      display: "block",
-                      marginBottom: "0.4rem",
-                    }}>{field.label}</label>
-                    <input
-                      type={field.type}
-                      placeholder={field.placeholder}
-                      style={{
-                        width: "100%",
-                        background: "rgba(255,255,255,0.04)",
-                        border: "1px solid rgba(43,127,255,0.2)",
-                        padding: "12px 16px",
-                        fontFamily: "'Raleway', sans-serif",
-                        fontSize: "0.88rem",
-                        color: "#e8eaf0",
-                        outline: "none",
-                        transition: "border-color 0.25s, box-shadow 0.25s",
-                        boxSizing: "border-box",
-                        colorScheme: "dark",
-                      }}
-                      onFocus={(e) => {
-                        (e.target as HTMLInputElement).style.borderColor = "rgba(43,127,255,0.6)";
-                        (e.target as HTMLInputElement).style.boxShadow = "0 0 12px rgba(43,127,255,0.15)";
-                      }}
-                      onBlur={(e) => {
-                        (e.target as HTMLInputElement).style.borderColor = "rgba(43,127,255,0.2)";
-                        (e.target as HTMLInputElement).style.boxShadow = "none";
-                      }}
-                    />
-                  </div>
-                ))}
 
                 <div style={{ textAlign: "left" }}>
-                  <label style={{
-                    fontFamily: "'Raleway', sans-serif",
-                    fontWeight: 500,
-                    fontSize: "0.62rem",
-                    letterSpacing: "0.25em",
-                    color: "rgba(184,196,208,0.55)",
-                    textTransform: "uppercase",
-                    display: "block",
-                    marginBottom: "0.4rem",
-                  }}>Message / Special Requests</label>
+                  <label style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500, fontSize: "0.62rem", letterSpacing: "0.25em", color: "rgba(184,196,208,0.55)", textTransform: "uppercase", display: "block", marginBottom: "0.4rem" }}>Your Name</label>
+                  <input required type="text" placeholder="Full Name" value={form.name} onChange={e => setForm(f => ({...f, name: e.target.value}))} style={inputStyle}
+                    onFocus={e => { e.target.style.borderColor = "rgba(43,127,255,0.6)"; e.target.style.boxShadow = "0 0 12px rgba(43,127,255,0.15)"; }}
+                    onBlur={e => { e.target.style.borderColor = "rgba(43,127,255,0.2)"; e.target.style.boxShadow = "none"; }} />
+                </div>
+
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+                  <div style={{ textAlign: "left" }}>
+                    <label style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500, fontSize: "0.62rem", letterSpacing: "0.25em", color: "rgba(184,196,208,0.55)", textTransform: "uppercase", display: "block", marginBottom: "0.4rem" }}>Phone</label>
+                    <input required type="tel" placeholder="(512) 000-0000" value={form.phone} onChange={e => setForm(f => ({...f, phone: e.target.value}))} style={inputStyle}
+                      onFocus={e => { e.target.style.borderColor = "rgba(43,127,255,0.6)"; e.target.style.boxShadow = "0 0 12px rgba(43,127,255,0.15)"; }}
+                      onBlur={e => { e.target.style.borderColor = "rgba(43,127,255,0.2)"; e.target.style.boxShadow = "none"; }} />
+                  </div>
+                  <div style={{ textAlign: "left" }}>
+                    <label style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500, fontSize: "0.62rem", letterSpacing: "0.25em", color: "rgba(184,196,208,0.55)", textTransform: "uppercase", display: "block", marginBottom: "0.4rem" }}>Email</label>
+                    <input required type="email" placeholder="your@email.com" value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} style={inputStyle}
+                      onFocus={e => { e.target.style.borderColor = "rgba(43,127,255,0.6)"; e.target.style.boxShadow = "0 0 12px rgba(43,127,255,0.15)"; }}
+                      onBlur={e => { e.target.style.borderColor = "rgba(43,127,255,0.2)"; e.target.style.boxShadow = "none"; }} />
+                  </div>
+                </div>
+
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+                  <div style={{ textAlign: "left" }}>
+                    <label style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500, fontSize: "0.62rem", letterSpacing: "0.25em", color: "rgba(184,196,208,0.55)", textTransform: "uppercase", display: "block", marginBottom: "0.4rem" }}>Date</label>
+                    <input required type="date" value={form.date} onChange={e => setForm(f => ({...f, date: e.target.value}))} style={inputStyle}
+                      onFocus={e => { e.target.style.borderColor = "rgba(43,127,255,0.6)"; e.target.style.boxShadow = "0 0 12px rgba(43,127,255,0.15)"; }}
+                      onBlur={e => { e.target.style.borderColor = "rgba(43,127,255,0.2)"; e.target.style.boxShadow = "none"; }} />
+                  </div>
+                  <div style={{ textAlign: "left" }}>
+                    <label style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500, fontSize: "0.62rem", letterSpacing: "0.25em", color: "rgba(184,196,208,0.55)", textTransform: "uppercase", display: "block", marginBottom: "0.4rem" }}>Party Size</label>
+                    <select value={form.partySize} onChange={e => setForm(f => ({...f, partySize: e.target.value}))} style={{...inputStyle, cursor: "pointer"}}>
+                      <option value="" style={{ background: "#0a0a0f" }}>Select size</option>
+                      {["1–2","3–5","6–10","11–20","20+"].map(s => <option key={s} value={s} style={{ background: "#0a0a0f" }}>{s} guests</option>)}
+                    </select>
+                  </div>
+                </div>
+
+                <div style={{ textAlign: "left" }}>
+                  <label style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500, fontSize: "0.62rem", letterSpacing: "0.25em", color: "rgba(184,196,208,0.55)", textTransform: "uppercase", display: "block", marginBottom: "0.4rem" }}>Occasion</label>
+                  <select value={form.occasion} onChange={e => setForm(f => ({...f, occasion: e.target.value}))} style={{...inputStyle, cursor: "pointer"}}>
+                    <option value="" style={{ background: "#0a0a0f" }}>Select occasion</option>
+                    {["Birthday","Bachelorette / Bachelor","Anniversary","Corporate Event","Private Buyout","Bottle Service","General Reservation","Other"].map(o => <option key={o} value={o} style={{ background: "#0a0a0f" }}>{o}</option>)}
+                  </select>
+                </div>
+
+                <div style={{ textAlign: "left" }}>
+                  <label style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500, fontSize: "0.62rem", letterSpacing: "0.25em", color: "rgba(184,196,208,0.55)", textTransform: "uppercase", display: "block", marginBottom: "0.4rem" }}>Message / Special Requests</label>
                   <textarea
-                    placeholder="Tell us about your event, party size, or bottle service inquiry..."
+                    placeholder="Tell us about your event, VIP preferences, or bottle service inquiry..."
                     rows={3}
-                    style={{
-                      width: "100%",
-                      background: "rgba(255,255,255,0.04)",
-                      border: "1px solid rgba(43,127,255,0.2)",
-                      padding: "12px 16px",
-                      fontFamily: "'Raleway', sans-serif",
-                      fontSize: "0.88rem",
-                      color: "#e8eaf0",
-                      outline: "none",
-                      resize: "vertical",
-                      transition: "border-color 0.25s",
-                      boxSizing: "border-box",
-                    }}
-                    onFocus={(e) => {
-                      (e.target as HTMLTextAreaElement).style.borderColor = "rgba(43,127,255,0.6)";
-                    }}
-                    onBlur={(e) => {
-                      (e.target as HTMLTextAreaElement).style.borderColor = "rgba(43,127,255,0.2)";
-                    }}
+                    value={form.message}
+                    onChange={e => setForm(f => ({...f, message: e.target.value}))}
+                    style={{ ...inputStyle, resize: "vertical" as const }}
+                    onFocus={e => { e.target.style.borderColor = "rgba(43,127,255,0.6)"; }}
+                    onBlur={e => { e.target.style.borderColor = "rgba(43,127,255,0.2)"; }}
                   />
                 </div>
 
                 <button
+                  type="submit"
+                  disabled={sending}
                   style={{
                     width: "100%",
-                    background: "linear-gradient(135deg, #2B7FFF, #8B3FBF)",
+                    background: sending ? "rgba(43,127,255,0.4)" : "linear-gradient(135deg, #2B7FFF, #8B3FBF)",
                     border: "none",
                     padding: "16px",
                     fontFamily: "'Cinzel', serif",
@@ -1009,24 +1061,15 @@ function ReserveSection() {
                     letterSpacing: "0.25em",
                     color: "#fff",
                     textTransform: "uppercase",
-                    cursor: "pointer",
+                    cursor: sending ? "wait" : "pointer",
                     boxShadow: "0 0 20px rgba(43,127,255,0.4)",
                     transition: "box-shadow 0.25s, transform 0.15s",
                     marginTop: "0.5rem",
                   }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.boxShadow = "0 0 40px rgba(43,127,255,0.7), 0 0 80px rgba(139,63,191,0.4)";
-                    (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px rgba(43,127,255,0.4)";
-                    (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-                  }}
-                  onClick={() => {
-                    alert("Thank you! We'll be in touch shortly to confirm your reservation.");
-                  }}
+                  onMouseEnter={e => { if (!sending) { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 40px rgba(43,127,255,0.7), 0 0 80px rgba(139,63,191,0.4)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px rgba(43,127,255,0.4)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
                 >
-                  Submit Reservation
+                  {sending ? "Opening Email..." : "Submit Reservation"}
                 </button>
               </div>
 
@@ -1039,29 +1082,18 @@ function ReserveSection() {
                 gap: "2rem",
                 flexWrap: "wrap",
               }}>
-                <a href="tel:5122361126" style={{
-                  fontFamily: "'Raleway', sans-serif",
-                  fontSize: "0.78rem",
-                  color: "rgba(184,196,208,0.55)",
-                  textDecoration: "none",
-                  letterSpacing: "0.05em",
-                  transition: "color 0.2s",
-                }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#2B7FFF"; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(184,196,208,0.55)"; }}
+                <a href="tel:5122361126" style={{ fontFamily: "'Raleway', sans-serif", fontSize: "0.78rem", color: "rgba(184,196,208,0.55)", textDecoration: "none", letterSpacing: "0.05em", transition: "color 0.2s" }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "#2B7FFF"; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(184,196,208,0.55)"; }}
                 >
                   📞 (512) 236-1126
                 </a>
-                <span style={{
-                  fontFamily: "'Raleway', sans-serif",
-                  fontSize: "0.78rem",
-                  color: "rgba(184,196,208,0.55)",
-                  letterSpacing: "0.05em",
-                }}>
+                <span style={{ fontFamily: "'Raleway', sans-serif", fontSize: "0.78rem", color: "rgba(184,196,208,0.55)", letterSpacing: "0.05em" }}>
                   📍 211 E. 6th St, Austin TX
                 </span>
               </div>
-            </div>
+            </form>
+            )}
           </div>
         </Reveal>
       </div>
