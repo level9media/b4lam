@@ -70,7 +70,7 @@ export default function About() {
       }}>
         {/* Background — bar area photo */}
         <img
-          src="/manus-storage/bararea_3e4c2a61.jpg"
+          src="/manus-storage/bararea_ee451366.jpg"
           alt=""
           aria-hidden="true"
           style={{
@@ -182,7 +182,7 @@ export default function About() {
             <Reveal delay={0.05}>
               <div style={{ position: "relative" }}>
                 <img
-                  src="/manus-storage/viewoflounge_b3e3e6e5.jpg"
+                  src="/manus-storage/VIEWOFLOUNGE_58be8d57.jpg"
                   alt="Blindside Lounge interior"
                   style={{
                     width: "100%", height: "380px",
@@ -377,7 +377,7 @@ export default function About() {
       {/* ── FULL-WIDTH VENUE PHOTO ────────────────────────────── */}
       <section style={{ position: "relative", height: "clamp(280px, 40vw, 480px)", overflow: "hidden" }}>
         <img
-          src="/manus-storage/coolbarimage_5d2b8c62.jpg"
+          src="/manus-storage/coolbarimage_34ba51f4.jpg"
           alt="Blindside Lounge bar area"
           style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%", filter: "brightness(0.55)" }}
         />
