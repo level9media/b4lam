@@ -8,12 +8,16 @@ import { PageTransitionProvider } from "./contexts/PageTransitionContext";
 import SigilOverlay from "./components/SigilOverlay";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
+import Artists from "./pages/Artists";
+import Experience from "./pages/Experience";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/menu"} component={Menu} />
+      <Route path={"/artists"} component={Artists} />
+      <Route path={"/experience"} component={Experience} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

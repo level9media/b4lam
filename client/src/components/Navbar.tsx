@@ -9,11 +9,11 @@ import { motion } from "framer-motion";
 import { usePageTransition } from "@/contexts/PageTransitionContext";
 
 const NAV_LINKS = [
-  { label: "Experience", href: "#experience" },
-  { label: "Cocktails", href: "#cocktails" },
+  { label: "Home", href: "/", isPage: true },
   { label: "Menu", href: "/menu", isPage: true },
+  { label: "Gallery", href: "/experience", isPage: true },
+  { label: "Artists", href: "/artists", isPage: true },
   { label: "Events", href: "#events" },
-  { label: "Gallery", href: "#gallery" },
   { label: "Reserve", href: "#reserve" },
 ];
 

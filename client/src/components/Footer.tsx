@@ -136,6 +136,48 @@ export default function Footer() {
             ))}
           </div>
 
+          {/* Pages */}
+          <div>
+            <h4
+              style={{
+                fontFamily: "'Cinzel', serif",
+                fontWeight: 600,
+                fontSize: "0.65rem",
+                letterSpacing: "0.3em",
+                color: "#2B7FFF",
+                textShadow: "0 0 8px rgba(43,127,255,0.5)",
+                marginBottom: "1rem",
+                textTransform: "uppercase",
+              }}
+            >
+              Explore
+            </h4>
+            {[
+              { label: "The Experience", href: "/experience" },
+              { label: "Cocktail Menu", href: "/menu" },
+              { label: "Artist Discovery", href: "/artists" },
+            ].map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                style={{
+                  display: "block",
+                  fontFamily: "'Raleway', sans-serif",
+                  fontSize: "0.82rem",
+                  color: "rgba(184,196,208,0.6)",
+                  textDecoration: "none",
+                  marginBottom: "0.5rem",
+                  letterSpacing: "0.05em",
+                  transition: "color 0.2s",
+                }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#2B7FFF"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(184,196,208,0.6)"; }}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+
           {/* Social */}
           <div>
             <h4
