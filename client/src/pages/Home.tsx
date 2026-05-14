@@ -195,9 +195,9 @@ function HeroSection() {
           transition={{ duration: 1.2, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
           style={{
             fontFamily: "'Cinzel', serif",
-            fontWeight: 900,
+            fontWeight: 300,
             fontSize: "clamp(3rem, 10vw, 8rem)",
-            letterSpacing: "0.12em",
+            letterSpacing: "0.22em",
             color: "#e8eaf0",
             textShadow: "0 0 20px rgba(184,196,208,0.4), 0 0 60px rgba(43,127,255,0.25), 0 0 120px rgba(139,63,191,0.15)",
             lineHeight: 0.9,
@@ -214,13 +214,13 @@ function HeroSection() {
           style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1.5rem", marginBottom: "0.5rem" }}
         >
           <div style={{ height: "1px", width: "clamp(60px, 8vw, 120px)", background: "linear-gradient(to right, transparent, #8B3FBF)" }} />
-          <span style={{
+          <span           style={{
             fontFamily: "'Cinzel', serif",
-            fontWeight: 400,
+            fontWeight: 300,
             fontSize: "clamp(0.9rem, 2.5vw, 1.6rem)",
-            letterSpacing: "0.65em",
+            letterSpacing: "0.75em",
             color: "#8B3FBF",
-            textShadow: "0 0 12px rgba(139,63,191,0.9), 0 0 30px rgba(139,63,191,0.5)",
+            textShadow: "0 0 10px rgba(139,63,191,0.8), 0 0 25px rgba(139,63,191,0.4)",
           }}>LOUNGE</span>
           <div style={{ height: "1px", width: "clamp(60px, 8vw, 120px)", background: "linear-gradient(to left, transparent, #8B3FBF)" }} />
         </motion.div>

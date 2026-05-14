@@ -72,9 +72,9 @@ export default function Navbar() {
             <span
               style={{
                 fontFamily: "'Cinzel', serif",
-                fontWeight: 700,
+                fontWeight: 300,
                 fontSize: "0.95rem",
-                letterSpacing: "0.2em",
+                letterSpacing: "0.3em",
                 color: "#e8eaf0",
                 lineHeight: 1,
               }}
@@ -84,9 +84,9 @@ export default function Navbar() {
             <span
               style={{
                 fontFamily: "'Cinzel', serif",
-                fontWeight: 400,
+                fontWeight: 300,
                 fontSize: "0.55rem",
-                letterSpacing: "0.45em",
+                letterSpacing: "0.55em",
                 color: "#8B3FBF",
                 textShadow: "0 0 8px rgba(139,63,191,0.7)",
               }}

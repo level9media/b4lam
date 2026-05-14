@@ -150,12 +150,12 @@ export default function SplashScreen({ onEnter }: SplashScreenProps) {
               <h1
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontWeight: 700,
+                  fontWeight: 300,
                   fontSize: "clamp(2.2rem, 6vw, 4.5rem)",
-                  letterSpacing: "0.25em",
+                  letterSpacing: "0.35em",
                   color: "#e8eaf0",
                   textShadow:
-                    "0 0 10px rgba(184,196,208,0.5), 0 0 30px rgba(43,127,255,0.3), 0 0 60px rgba(43,127,255,0.15)",
+                    "0 0 8px rgba(184,196,208,0.35), 0 0 25px rgba(43,127,255,0.2), 0 0 50px rgba(43,127,255,0.1)",
                   lineHeight: 1,
                   margin: 0,
                 }}
@@ -176,12 +176,12 @@ export default function SplashScreen({ onEnter }: SplashScreenProps) {
                 <span
                   style={{
                     fontFamily: "'Cinzel', serif",
-                    fontWeight: 400,
+                    fontWeight: 300,
                     fontSize: "clamp(0.75rem, 1.8vw, 1.1rem)",
-                    letterSpacing: "0.55em",
+                    letterSpacing: "0.65em",
                     color: "#8B3FBF",
                     textShadow:
-                      "0 0 8px rgba(139,63,191,0.8), 0 0 20px rgba(139,63,191,0.5)",
+                      "0 0 8px rgba(139,63,191,0.7), 0 0 20px rgba(139,63,191,0.4)",
                   }}
                 >
                   LOUNGE

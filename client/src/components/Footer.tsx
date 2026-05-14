@@ -36,9 +36,9 @@ export default function Footer() {
             <p
               style={{
                 fontFamily: "'Cinzel', serif",
-                fontWeight: 700,
+                fontWeight: 300,
                 fontSize: "1rem",
-                letterSpacing: "0.2em",
+                letterSpacing: "0.3em",
                 color: "#e8eaf0",
                 marginBottom: "0.25rem",
               }}
@@ -48,9 +48,9 @@ export default function Footer() {
             <p
               style={{
                 fontFamily: "'Cinzel', serif",
-                fontWeight: 400,
+                fontWeight: 300,
                 fontSize: "0.6rem",
-                letterSpacing: "0.45em",
+                letterSpacing: "0.55em",
                 color: "#8B3FBF",
                 textShadow: "0 0 8px rgba(139,63,191,0.6)",
                 marginBottom: "1rem",
