@@ -785,6 +785,42 @@ function FinalCTASection() {
         >
           Apply to Perform
         </button>
+
+        {/* Video Recording link */}
+        <div style={{ marginTop: "2rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem", maxWidth: "320px", margin: "0 auto 1.25rem" }}>
+            <div style={{ flex: 1, height: "1px", background: "linear-gradient(to right, transparent, rgba(139,63,191,0.4))" }} />
+            <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
+              <path d="M7 0L8.5 5.5L14 7L8.5 8.5L7 14L5.5 8.5L0 7L5.5 5.5L7 0Z" fill="#8B3FBF" opacity="0.8" />
+            </svg>
+            <div style={{ flex: 1, height: "1px", background: "linear-gradient(to left, transparent, rgba(139,63,191,0.4))" }} />
+          </div>
+          <a
+            href="/video-recording"
+            style={{
+              fontFamily: "'Raleway', sans-serif",
+              fontWeight: 500,
+              fontSize: "0.75rem",
+              letterSpacing: "0.2em",
+              color: "rgba(139,63,191,0.85)",
+              textDecoration: "none",
+              textTransform: "uppercase",
+              textShadow: "0 0 10px rgba(139,63,191,0.5)",
+              transition: "color 0.2s, text-shadow 0.2s",
+              display: "inline-block",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.color = "#8B3FBF";
+              (e.currentTarget as HTMLElement).style.textShadow = "0 0 18px rgba(139,63,191,0.9)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.color = "rgba(139,63,191,0.85)";
+              (e.currentTarget as HTMLElement).style.textShadow = "0 0 10px rgba(139,63,191,0.5)";
+            }}
+          >
+            ◆ &nbsp; Video Recording of Your Set &mdash; $50
+          </a>
+        </div>
       </Reveal>
 
       {open && (

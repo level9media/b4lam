@@ -158,6 +158,7 @@ export default function Footer() {
               { label: "The Experience", href: "/experience" },
               { label: "Cocktail Menu", href: "/menu" },
               { label: "Artist Discovery", href: "/artists" },
+              { label: "Video Recording of Set — $50", href: "/video-recording" },
             ].map(({ label, href }) => (
               <a
                 key={label}

@@ -12,6 +12,7 @@ import Artists from "./pages/Artists";
 import Experience from "./pages/Experience";
 import About from "./pages/About";
 import Events from "./pages/Events";
+import VideoRecording from "./pages/VideoRecording";
 
 function Router() {
   return (
@@ -22,6 +23,7 @@ function Router() {
       <Route path={"/experience"} component={Experience} />
       <Route path={"/about"} component={About} />
       <Route path={"/events"} component={Events} />
+      <Route path={"/video-recording"} component={VideoRecording} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
