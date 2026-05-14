@@ -370,27 +370,98 @@ function HeroSection() {
 /* ═══════════════════════════════════════════════════════════
    EXPERIENCE SECTION
    ═══════════════════════════════════════════════════════════ */
+/* Neon SVG icons — each renders as a glowing neon-sign style illustration */
+const NeonCocktailIcon = () => (
+  <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <filter id="glow-c">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <g filter="url(#glow-c)">
+      <path d="M8 6 L36 6 L24 24 L24 38 L20 38 L20 24 Z" stroke="#2B7FFF" strokeWidth="1.5" fill="none" strokeLinejoin="round"/>
+      <circle cx="22" cy="38" r="5" stroke="#2B7FFF" strokeWidth="1.5" fill="none"/>
+      <path d="M8 14 L36 14" stroke="rgba(43,127,255,0.5)" strokeWidth="1" strokeDasharray="2 3"/>
+      <circle cx="28" cy="10" r="2" fill="#2B7FFF" opacity="0.9"/>
+    </g>
+  </svg>
+);
+
+const NeonDJIcon = () => (
+  <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <filter id="glow-d">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <g filter="url(#glow-d)">
+      <circle cx="22" cy="22" r="14" stroke="#8B3FBF" strokeWidth="1.5" fill="none"/>
+      <circle cx="22" cy="22" r="4" stroke="#8B3FBF" strokeWidth="1.5" fill="none"/>
+      <circle cx="22" cy="22" r="8" stroke="rgba(139,63,191,0.4)" strokeWidth="1" strokeDasharray="3 4" fill="none"/>
+      <line x1="22" y1="8" x2="22" y2="14" stroke="#8B3FBF" strokeWidth="1.5"/>
+      <line x1="22" y1="30" x2="22" y2="36" stroke="#8B3FBF" strokeWidth="1.5"/>
+      <line x1="8" y1="22" x2="14" y2="22" stroke="#8B3FBF" strokeWidth="1.5"/>
+      <line x1="30" y1="22" x2="36" y2="22" stroke="#8B3FBF" strokeWidth="1.5"/>
+    </g>
+  </svg>
+);
+
+const NeonBottleIcon = () => (
+  <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <filter id="glow-b">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <g filter="url(#glow-b)">
+      <path d="M17 6 L17 12 C12 15 10 20 10 26 C10 34 14 38 22 38 C30 38 34 34 34 26 C34 20 32 15 27 12 L27 6 Z" stroke="#2B7FFF" strokeWidth="1.5" fill="none" strokeLinejoin="round"/>
+      <line x1="17" y1="6" x2="27" y2="6" stroke="#2B7FFF" strokeWidth="1.5"/>
+      <path d="M13 24 Q22 20 31 24" stroke="rgba(43,127,255,0.5)" strokeWidth="1" fill="none"/>
+      <circle cx="22" cy="30" r="3" stroke="rgba(43,127,255,0.7)" strokeWidth="1" fill="none"/>
+    </g>
+  </svg>
+);
+
+const NeonCorporateIcon = () => (
+  <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <filter id="glow-e">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <g filter="url(#glow-e)">
+      <rect x="6" y="14" width="32" height="22" rx="1" stroke="#2B7FFF" strokeWidth="1.5" fill="none"/>
+      <path d="M14 14 L14 10 C14 8 16 7 18 7 L26 7 C28 7 30 8 30 10 L30 14" stroke="#2B7FFF" strokeWidth="1.5" fill="none"/>
+      <line x1="6" y1="22" x2="38" y2="22" stroke="rgba(43,127,255,0.5)" strokeWidth="1"/>
+      <line x1="22" y1="22" x2="22" y2="36" stroke="rgba(43,127,255,0.4)" strokeWidth="1"/>
+      <circle cx="22" cy="22" r="2.5" fill="#2B7FFF" opacity="0.9"/>
+      <line x1="10" y1="28" x2="18" y2="28" stroke="rgba(43,127,255,0.4)" strokeWidth="1"/>
+      <line x1="26" y1="28" x2="34" y2="28" stroke="rgba(43,127,255,0.4)" strokeWidth="1"/>
+    </g>
+  </svg>
+);
+
 function ExperienceSection() {
   const features = [
     {
-      icon: "🍸",
+      icon: <NeonCocktailIcon />,
       title: "Craft Cocktails",
       desc: "Handcrafted cocktails inspired by Mesoamerican culture and modern mixology. Every pour is a ritual.",
+      glowColor: "rgba(43,127,255,0.15)",
     },
     {
-      icon: "🎵",
+      icon: <NeonDJIcon />,
       title: "Live DJs",
       desc: "Austin's top selectors spinning across hip-hop, Latin, electronic, and beyond every weekend.",
+      glowColor: "rgba(139,63,191,0.15)",
     },
     {
-      icon: "🥂",
+      icon: <NeonBottleIcon />,
       title: "Bottle Service",
       desc: "Elevated VIP experiences with premium bottle packages and dedicated service for your crew.",
+      glowColor: "rgba(43,127,255,0.15)",
     },
     {
-      icon: "🎨",
-      title: "Tattoo Artists",
-      desc: "On-site tattoo artists bringing the Blindside Tattoo & Piercing experience to the lounge floor.",
+      icon: <NeonCorporateIcon />,
+      title: "Corporate & Private Events",
+      desc: "Transform Blindside into your exclusive venue. Full buyouts, branded experiences, and premium hospitality for corporate events, launch parties, and private celebrations.",
+      glowColor: "rgba(43,127,255,0.15)",
     },
   ];
 
@@ -425,46 +496,65 @@ function ExperienceSection() {
           />
         </Reveal>
 
-        {/* Feature grid */}
+        {/* Feature grid — 4 equal columns, no overflow artifacts */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-          gap: "1.5px",
-          background: "rgba(43,127,255,0.1)",
-          border: "1px solid rgba(43,127,255,0.1)",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "0",
+          border: "1px solid rgba(43,127,255,0.12)",
+          overflow: "hidden",
         }}>
           {features.map((f, i) => (
             <Reveal key={f.title} delay={i * 0.1}>
               <div
                 style={{
-                  background: "#000",
+                  background: "#06060e",
                   padding: "2.5rem 2rem",
+                  borderRight: i < features.length - 1 ? "1px solid rgba(43,127,255,0.12)" : "none",
                   transition: "background 0.3s ease",
                   cursor: "default",
+                  height: "100%",
+                  boxSizing: "border-box",
                 }}
                 onMouseEnter={(e) => {
                   (e.currentTarget as HTMLElement).style.background = "rgba(43,127,255,0.05)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.background = "#000";
+                  (e.currentTarget as HTMLElement).style.background = "#06060e";
                 }}
               >
-                <div style={{ fontSize: "2rem", marginBottom: "1rem" }}>{f.icon}</div>
+                {/* Neon icon with glow halo */}
+                <div style={{
+                  marginBottom: "1.5rem",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "64px",
+                  height: "64px",
+                  borderRadius: "2px",
+                  background: f.glowColor,
+                  boxShadow: `0 0 20px ${f.glowColor}, inset 0 0 20px rgba(43,127,255,0.05)`,
+                  border: "1px solid rgba(43,127,255,0.2)",
+                }}>
+                  {f.icon}
+                </div>
                 <h3 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontWeight: 600,
-                  fontSize: "0.85rem",
+                  fontWeight: 400,
+                  fontSize: "0.8rem",
                   letterSpacing: "0.2em",
                   color: "#e8eaf0",
                   marginBottom: "0.75rem",
                   textTransform: "uppercase",
+                  lineHeight: 1.4,
                 }}>{f.title}</h3>
                 <p style={{
                   fontFamily: "'Raleway', sans-serif",
                   fontWeight: 300,
-                  fontSize: "0.85rem",
+                  fontSize: "0.83rem",
                   color: "rgba(184,196,208,0.6)",
-                  lineHeight: 1.8,
+                  lineHeight: 1.85,
+                  margin: 0,
                 }}>{f.desc}</p>
               </div>
             </Reveal>
