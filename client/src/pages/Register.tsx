@@ -28,12 +28,12 @@ export default function Register() {
     e.preventDefault();
 
     if (pin !== pinConfirm) {
-      toast.error("PINs do not match.");
+      toast.error("Passwords do not match.");
       return;
     }
 
-    if (!/^\d{6}$/.test(pin)) {
-      toast.error("PIN must be exactly 6 digits.");
+    if (pin.length < 4) {
+      toast.error("Password must be at least 4 characters.");
       return;
     }
 
@@ -186,22 +186,17 @@ export default function Register() {
                 marginBottom: "0.4rem",
               }}
             >
-              6-DIGIT PIN
+              PASSWORD
             </label>
             <input
               type="password"
               value={pin}
-              onChange={(e) => setPin(e.target.value.replace(/\D/g, "").slice(0, 6))}
+              onChange={(e) => setPin(e.target.value)}
               required
-              maxLength={6}
-              placeholder="••••••"
-              style={{
-                ...inputStyle,
-                fontFamily: "'Space Mono', monospace",
-                fontSize: "1.5rem",
-                letterSpacing: "0.5em",
-                textAlign: "center",
-              }}
+              minLength={4}
+              maxLength={128}
+              placeholder="Choose a password"
+              style={inputStyle}
             />
           </div>
 
@@ -216,22 +211,17 @@ export default function Register() {
                 marginBottom: "0.4rem",
               }}
             >
-              CONFIRM PIN
+              CONFIRM PASSWORD
             </label>
             <input
               type="password"
               value={pinConfirm}
-              onChange={(e) => setPinConfirm(e.target.value.replace(/\D/g, "").slice(0, 6))}
+              onChange={(e) => setPinConfirm(e.target.value)}
               required
-              maxLength={6}
-              placeholder="••••••"
-              style={{
-                ...inputStyle,
-                fontFamily: "'Space Mono', monospace",
-                fontSize: "1.5rem",
-                letterSpacing: "0.5em",
-                textAlign: "center",
-              }}
+              minLength={4}
+              maxLength={128}
+              placeholder="Confirm password"
+              style={inputStyle}
             />
           </div>
 

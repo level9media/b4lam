@@ -44,7 +44,7 @@ export const authRouter = router({
         inviteCode: z.string().min(1),
         name: z.string().min(2).max(100),
         email: z.string().email(),
-        pin: z.string().length(6).regex(/^\d{6}$/, "PIN must be 6 digits"),
+        pin: z.string().min(1).max(128),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -107,12 +107,12 @@ export const authRouter = router({
       return { success: true, member };
     }),
 
-  // Login with email + PIN
+  // Login with email + password (or legacy 6-digit PIN)
   login: publicProcedure
     .input(
       z.object({
         email: z.string().email(),
-        pin: z.string().length(6),
+        pin: z.string().min(1).max(128),
       })
     )
     .mutation(async ({ input, ctx }) => {
