@@ -1,0 +1,26 @@
+{
+  "name": "B4LAM",
+  "short_name": "B4LAM",
+  "description": "By invitation only.",
+  "start_url": "/portal",
+  "display": "standalone",
+  "background_color": "#050508",
+  "theme_color": "#050508",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["entertainment"],
+  "lang": "en"
+}
